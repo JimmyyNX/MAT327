@@ -1,0 +1,143 @@
+\section{Day 1 : Introduction, Topological Spaces and Bases}
+This class is taught by Daniel Wilches Calderon during the Summer 2024 semester. We will mostly be following Topology by Munkres, with some suggested readings on the Quercus page
+\subsection{Marking Scheme}
+\begin{enumerate}
+    \item Final Exam - 30\%
+    \item Term Test - 20\%
+    \item Quizzes - 50\% (Best 8 of 10)
+
+    Every week we will be given a problem set, and during tutorial one of those questions will be tested
+\end{enumerate}
+\subsection{Open sets in the Real Numbers}
+Recall that $U\in\mathbb{R}$ is open if
+\begin{center}
+    for all $x\in U$, there exists $\varepsilon>0$ such that $x\in (x-\varepsilon,x+\varepsilon)\subseteq U$
+\end{center}
+Open sets have some properties. That the arbitrary union and finite intersection of open sets is still open
+\begin{enumerate}
+    \item Arbitrary Union
+    
+    Let $\{U_\alpha \vert \alpha\in\Lambda\footnote{We use $\Lambda$ to denote an arbitrary indexing set}\}$ be an arbitrary collection of open sets, if $x\in \bigcup_{\alpha\in\Lambda}$, then $x\in U_\alpha$ for some $\alpha\in\Lambda$, and since $U_\alpha$ is open, we have that there exists some $\varepsilon>0$ such that
+    \[x\in(x-\varepsilon,x+\varepsilon)\subseteq U_\alpha \subseteq\bigcup_{\alpha\in\Lambda}U_\alpha\]
+    This same result doesn't hold true for arbitrary intersection, but it does for finite.
+    \item Finite intersection
+    
+    Let $\{U_k\vert k\leq n\}$ be a finite collection of open sets. if $x\in\bigcap_{k\leq n}U_k$, then $x\in U_k$ for all $k\leq n$. Since each $U_k$ is open, there are $\varepsilon_i>0$ such that $x\in(x-\varepsilon_i,x+\varepsilon_i)\subset U_i$ for $i=1,2,\ldots,n$. Then pick $\varepsilon = \min\{\varepsilon_1,\ldots,\varepsilon_n\}$, then it follows that
+    \[x\in(x-\varepsilon,x+\varepsilon)\subseteq(x-\varepsilon_k,x+\varepsilon_k)\subseteq U_k\]
+    for all $k\leq n$, so $(x-\varepsilon,x+\varepsilon)\subseteq\bigcap_{k\leq n}U_k$.
+\end{enumerate}
+\subsection{Topological Spaces}
+
+\begin{definition}[Topological Space]
+    A toplogy, $\tau$, on $X$ is a collection of subsets of $X$ that satisfy
+    \begin{enumerate}
+        \item $X,\varnothing\in\tau$
+        \item $\tau$ is closed under arbitrary Union
+        \item $\tau$ is closed under finite intersection
+    \end{enumerate}
+    The double $(X,\tau)$ is called a \href{https://en.wikipedia.org/wiki/Topological_space}{Topological Space}. Furthermore, the elements of $\tau$ are called open sets, and the elements of $X$ are called points.
+\end{definition}
+We first notice that showing the intersection of 2 sets of $\tau$ is still in $\tau$ is equivalent to showing the finite intersection of sets of $\tau$ will still be in $\tau$. This is true by an inductive argument.
+
+The following are some examples of topologies on a set with 2 elements, the prof briefly went over the topologies on a set with 3 elements, but basically left it as an exercise.
+\begin{example}[Topologies on 2 Point Sets]
+    Let $X=\{x,y\}$, we have the following are possible topologies on $X$
+    \begin{enumerate}
+        \item $\{X,\varnothing\}$
+        
+        This is often called the indiscrete/trivial topology
+        \item $\{X,\varnothing,\{x\},\{y\}\}$
+        
+        This is often called the discrete topology
+
+        \item\href{https://en.wikipedia.org/wiki/Sierpi%C5%84ski_space}{Sierpinski Spaces}
+        
+        The main characteristic of these spaces are that one point is open, while the other is not. More explicitly, the following are the Sierpinski Spaces
+        \begin{enumerate}
+            \item $\{X,\{x\},\varnothing\}$
+            \item $\{X,\{y\},\varnothing\}$
+        \end{enumerate}
+    \end{enumerate}
+\end{example}
+    You might've noticed that we labelled some of those examples as the \href{https://en.wikipedia.org/wiki/Discrete_space#:~:text=The%20discrete%20topology%20is%20the,set%20in%20the%20discrete%20topology.}{Discrete Topology} and the \href{https://en.wikipedia.org/wiki/Trivial_topology}{Indiscrete/Trivial} Topology.
+\begin{definition}[Discrete and Indiscrete Topology]
+    Given a set $X$, the discrete topology on $X$ is equal to the Power Set of $X$, and the indiscrete topology is equal to $\{x,\varnothing\}$
+\end{definition}
+    
+\begin{definition}[Cofinite Topology]
+    Let $X$ be a set, the \href{https://en.wikipedia.org/wiki/Cofiniteness#Cofinite_topology}{Cofinite Topology} on $X$ is the collection
+    \[\tau=\{U\subseteq X\vert X\backslash U\text{ is finite}\}\cup\{\varnothing\}\]    
+\end{definition}
+Now to prove that this is a topology, we must prove 3 things. The entire set and the empty set exist within $\tau$. $\tau$ is closed under arbitrary union and finite intersection. The first of these is almost immediate as $\varnothing\in\tau$ by definition, and $X\backslash X=\varnothing$, which is a finite set.
+\begin{enumerate}
+    \item Arbitrary Union
+    
+    Let $\{U_\alpha\vert\alpha\in\Lambda\}$ be open subsets of $X$, we have that $X\backslash U_\alpha$ is open. Then notice that \[X\backslash\left(\bigcup_{\alpha\in\Lambda}U_\alpha\right) = \bigcap_{\alpha\in\Lambda}\left(X\backslash U_\alpha\right)\], by DeMorgan's, which is an intersection of finite sets, so it must also be finite.
+    \item Finite Intersection
+    
+    Let $\{U_k\vert k\leq n\}$ be open, we have that $X\backslash U_k$ are finite, so then we notice that
+    
+    \[X\backslash\left(\bigcap_{k\leq n}U_k\right) = \bigcup_{k\leq n}\left(X\backslash U_k\right)\]
+    By DeMorgan's, which is a finite union of finite sets, which implies that it is finite, implying it must be in $\tau$
+\end{enumerate}
+\begin{definition}[Cocountable Topology]
+    The \href{https://en.wikipedia.org/wiki/Cocountable_topology}{Cocountable Topology} is defined synonymously to the cofinite topology. It is the collection 
+    \begin{center}
+        $\tau=\{U\subseteq X\vert X\backslash U$ is countable $\}\cup\{\varnothing\}$
+    \end{center}
+\end{definition}
+Prove that this is a topology
+\begin{definition}
+    Let $\tau,\tau'$ be topologies on $X$, if $\tau\subseteq\tau'$, then we say 
+    \begin{itemize}
+        \item $\tau$ is coarser than $\tau'$
+        \item $\tau'$ is finer than $\tau$
+    \end{itemize}
+    As a more general statement, if $\tau\subseteq\tau'$ or $\tau'\subseteq\tau$, then we say that $\tau$ and $\tau'$ are compareable.
+\end{definition}
+\subsection{Bases}
+These are very similiar to the bases you're probably familiar with from linear algebra, where the linear combinations form the vector space, where as these bases are sets that ``Unionize'' to form the topological space.
+\begin{definition}[Bases]
+    A bases for a topology on a set $X$ is a collection fo subsets of $X$, $\mathscr{B}$ such that
+    \begin{itemize}
+        \item for all $x\in X$, there exists $B\in\mathscr{B}$ such that $x\in B$
+        \item if $x\in B_1\cap B_2$, then there exists $B_3\in\mathscr{B}$ such that $x\in B_3\subseteq B_1\cap B_2$
+    \end{itemize}
+\end{definition}
+\begin{lemma}[Generated Topologies]
+    Let $\mathscr{B}$ be a basis of $X$, then the collection of all subsets $U$ of $X$ such that for all $x\in U$ there exists $B\in\mathscr{B}$ such that $x\in B\subseteq U$ is a topology on $X$. This is called the \href{https://proofwiki.org/wiki/Definition:Generated_Topology#:~:text=Definition%202-,The%20topology%20generated%20by%20S%2C%20denoted%20%CF%84(S)%2C,element%20of%20S%20is%20open.}{Generated Topology}    
+\end{lemma}
+We now need to prove that this is indeed a topology. We first have that $\varnothing\in\tau$ for vacuous reasons, then we also have that $X\in\tau$ because by letting $x\in X$ be arbitrary, we have that, by definition, there exists a $B\in\mathscr{B}$ such that $x\in B\subseteq X$.
+\begin{enumerate}
+    \item Union
+    
+    Let $\{U_\alpha\vert\alpha\in\Lambda\}$ be some collection of open sets, let $x\in\bigcup_{\alpha\in\Lambda}U_\alpha$, then there is some $\alpha\in\Lambda$ such that $x\in U_\alpha$, then let $B\in\mathscr{B}$ be such that $x\in B\subseteq U_\alpha\subseteq \bigcup_{\alpha\in\Lambda}U_\alpha$
+
+    \item Intersection
+    
+    Let $U_1,U_2\in\tau$, let $x\in U_1\cap U_2$, since $U_1,U_2\in\tau$, there exists $B_1,B_2$ such that
+    \begin{itemize}
+        \item $x\in B_1\subseteq U_1$
+        \item $x\in B_2\subseteq U_2$
+    \end{itemize}
+    so there must exist $B_3$ such that $x\in B_3\subseteq B_1\cap B_2$
+\end{enumerate}
+$\qed$
+\begin{example}[Circles]
+    The bases of open disks in $\mathbb{R}^2$
+    \[\tau = \{\{x\in\mathbb{R}^2\vert d(x,y)<\varepsilon\}\vert y\in\mathbb{R}^2,\varepsilon>0\}\]
+\end{example}
+\begin{example}[Rectangles]
+    \[\tau=\{(a_1,b_1)\times(a_2,b_2)\vert a_1,b_1,a_2,b_2\in\mathbb{R}\}\]
+\end{example}
+\begin{lemma}
+    For subset $\mathscr{B}$ of $\tau$ on $X$, The following are equivalent
+    \begin{itemize}
+        \item $\mathscr{B}$ is a basis generating $\tau$
+        \item every non-empty element of $\tau$ is a union of elements of $\mathscr{B}$
+    \end{itemize}
+\end{lemma}
+    Letting $(X,\tau)$ be a topological space, we begin with the forwards direction. Let $U\in\tau$ and let $x\in U$, since $\tau$ is generated by $\mathscr{B}$, there exists some $B_x\in\mathscr{B}$ such that $x\in B_x\subseteq U$, so it follows that
+    \[U=\bigcup_{x\in U}B_x\footnote{This equality wasn't immediately obvious to me why this is true, but you can prove it with double inclusion}\]
+    Conversely, let $x\in X$ be arbitrary. Since $X\in\tau$, $X=\bigcup_{\alpha\in\Lambda}U_\alpha$ with $B_\alpha\in\mathscr{B}$ it follows that $x\in B_\alpha$ for some $\alpha\in\Lambda$. Now let $B_1,B_2\in\mathscr{B}$ with $x$ existing in their intersection. We first have that $B_1\cap B_2$ is open, so we may represent it as a union,
+    \[ B_1\cap B_2 = \bigcup_{\alpha\in\Lambda}B_\alpha\] so $x\in B_\alpha$ for some $\alpha\in\Lambda$. so $x\in B_\alpha\subseteq B_1\cap B_2$ $\qed$
