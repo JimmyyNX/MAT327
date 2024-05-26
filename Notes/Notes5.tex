@@ -1,0 +1,128 @@
+\section{Day 5: Subspaces, Closed sets, Interiors and Closures}
+\subsection{Subspaces}
+\begin{definition}
+    Letting $(X,\tau)$ be a topological space, with $Y\subseteq X$, we define the \href{https://en.wikipedia.org/wiki/Subspace_topology}{Subspace Topology} on $Y$ to be
+    \[\tau_Y :=\{U\cap Y\vert U\in\tau\}\]    
+\end{definition}
+We often refer to such subsets of $X$ as a \textit{Subspace}
+\begin{proposition}
+    If $\mathscr{B}$ is a bases for the topology on $X$, and $Y\subseteq X$, then then collection
+    \[\mathscr{B}_Y := \{B\cap Y\vert B\in\mathscr{B}\}\]
+    is a basis for the subspace topology on $Y$
+\end{proposition}
+It's kind of like how in Linear Algebra you can take vectors from a basis of $V$ and construct a basis for subspace $U$.
+\begin{proof}
+    Let $X$ be a topological space and $\mathscr{B}$ be a basis for $\tau$. Let $U\cap Y$ be an open subset of $Y$, since we have that $\mathscr{B}$ is a basis for $\tau$, it follows that there exists $\{B_\alpha\vert\alpha\in\Lambda\}$ such that \[U=\bigcup_{\alpha\in\Lambda}B_\alpha\]
+    So it follows that \[ U\cap Y=\left(\bigcup_{\alpha\in\Lambda}B_\alpha\right) \cap Y = \bigcup_{\alpha\in\Lambda}\left(B_\alpha\cap Y\right)\]
+\end{proof}
+\begin{remark}
+    As a side tangent, what does it mean to be open?
+\end{remark}
+\begin{example}
+    We notice that in $[0,1)$ is open in $[0,1)$\footnote{The subspace topology}, but is isn't open in $\mathbb{R}$.
+\end{example}
+More generally, if $Y$ is a subspace of $X$ and $U\subset Y$ is open in $Y$, that doesn't imply that $U$ is open in $X$. But with the stronger hypothesis that if $Y$ is open in $X$ and $U$ is open in $Y$, we also have that $U$ is open in $X$.
+\begin{remark}
+    My intuition on why this is true is that the finite intersection between open sets in $X$ is still in open set in $X$, and since bases elements are necessarily open, the claim immediately follows.
+\end{remark}
+\begin{theorem}
+    If $A$ and $B$ are subspaces of $X$ and $Y$ respectively, then the product topology on $A\times B$ is eqaul to the topology on $A\times B$ as a subspace of $X\times Y$
+\end{theorem}
+\begin{proof}
+    Letting $U\times V$ be a bases element of $X\times Y$, it follows that $(X\times Y)\cap (A\times B)$ is a bases element of the subspace topology on $A\times B$, now we notice that \[(U\times V)\cap (A\times B) = (U\cap A)\times(V\cap B)\]
+    And notice that $(U\cap A)\times(V\cap B)$ is a bases element for the product topology on $A\times B$, so we have that the bases for the product and subspace topology must be equal, implying that their topologies must also be the same.
+\end{proof}
+\begin{remark}
+    But orders and subspace topologies don't behave as nicely as this.
+\end{remark}
+\begin{example}
+    I'm gonna need someone to send me the notes for this
+\end{example}
+\subsection{Closed Sets}
+\begin{definition}
+    Subset $C$ of a topological space $X$ is closed if its complement $X\backslash C$ is open.
+\end{definition}
+\begin{remark}
+    Being closed and open aren't mutually exclusive properties, in any topological space, $X$, we always have that $X$ and the empty set are always open and closed. And if you remember $Q10$ from the first problem set, it was shown that every open set is also actually closed.
+\end{remark}
+\begin{example}[Cofinite Topology]
+Recall the cofinite topology on $X$, we have that the closed sets are $X$ and all finite subsets of $X$
+\end{example}
+\begin{example}[Discrete Topology]
+    In this case, the closed sets are all the open sets
+\end{example}
+\begin{theorem}
+    The collection of closed subsets of a topological space $X$ satisfy
+    \begin{enumerate}
+        \item $\varnothing$ and $X$ are in it
+        \item It is closed under finite unions
+        \item it is closed under arbitrary intersection
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    This is going to be a sketch of the proof, mostly because I'm kinda lazy. But $1.$ is immediate from definition, then you basically abuse DeMorgan's to prove $2.$ and $3.$
+\end{proof}
+\begin{proposition}
+    Let $Y$ be a subspace of $X$. Then a subset $A\subseteq Y$ is closed in $Y$ if and only if, it is the intersection of closed subsets of $X$ with $Y$
+\end{proposition}
+\begin{proof}
+    Assume that $A$ is closed in $Y$, it follows that $A^C$ is open in $Y$, so by definition, it must be equal to the intersection of an open set $U\subseteq X$ with $Y$, it follows that $U^C$ is closed in $X$, and $A=Y\cap(U^C)$, so we have the desired result
+
+    Conversely, assume that $A=C\cap Y$, where $C$ is closed in $X$, then $C^C$ is open in $X$. We also have that $C^C\cap Y$ is open in $Y$, which is by definition of subspace topology. Then notice $C^C\cap Y = Y-A$, so it follows that $Y-A$ is open in $Y$, so $A$ is closed in $Y$
+\end{proof}
+\begin{proposition}
+    Let $Y$ be a subspace of $X$, if $A$ is closed in $Y$ and $Y$ is closed in $X$, then $A$ is closed in $X$. 
+\end{proposition}
+\begin{proof}
+    someone send me the proof of this plz
+\end{proof}
+\subsection{Interiors and Closures}
+\begin{definition}[Interiors and Closures]
+    Let $A$ be a subset of a topological space $(X,\tau)$
+    \begin{itemize}
+        \item The \href{https://en.wikipedia.org/wiki/Interior_(topology)}{interior} of $A$ is defined as \[ Int(A) = A^\mathrm{o} = \bigcup\{U\subseteq X\vert U\text{ is open and $U\subseteq A$}\}\]
+        \item The \href{https://en.wikipedia.org/wiki/Closure_(topology)}{Closure} of $A$ is defined as \[Cl(A) = \overline{A} = \bigcap\{C\subseteq X\vert \text{$C$ is closed and $A\subseteq C$}\}\]
+    \end{itemize}
+\end{definition}
+Clearly we have that the interior is open and the closure is closed, and
+\[A^\mathrm{o}\subseteq A\subseteq \overline{A}\]
+\begin{proposition}
+    Let $Y$ be a subspace of $X$, and let $A\subseteq Y$. then 
+    \begin{center}
+        Cl$_Y(A)$ = Cl$_X(A)\cap Y$
+    \end{center}
+\end{proposition}
+\begin{proof}
+    \begin{align*}
+        \text{Cl}_Y(A) &= \bigcap\{C\subseteq Y\vert C\text{ is closed in $X$ and $A\subseteq C$}\}\\
+        & = \bigcap\{C\cap Y\vert C\text{ is closed in $X$ and $A\subseteq C$}\}\\
+        &= Y\cap\left(\bigcap \{C\vert C\text{ is closed in $X$ and $A\subseteq C$}\}\right)\\
+        &= Y\cap \text{Cl}_X(A)
+    \end{align*}
+\end{proof}
+\begin{definition}
+    An open neighbourhood of a point $X$ in a topological space $X$ is an open set $U$ such that $x\in U$
+\end{definition}
+\begin{proposition}
+    Let $X$ be a topological space and let $\mathscr{B}$ be a bases for the topology of $X$, if $A\subseteq X$, and $x\in X$, then the following are equivalent
+    \begin{enumerate}
+        \item $x\in\overline{A}$
+        \item Every open neightbourhood of $x$ intersects $A$
+        \item Every basic open neighbourhood of $x$ intersects $A$
+    \end{enumerate}
+\end{proposition}
+\begin{proof}
+    Will do this later, I need to study for midterm 
+\end{proof}
+\begin{example}[Intervals]
+    Will do this later, I need to study for midterm 
+\end{example}
+\begin{example}[Points]
+    Will do this later, I need to study for midterm 
+\end{example}
+\begin{example}[The Integers]
+    Will do this later, I need to study for midterm 
+\end{example}
+\begin{example}[The Rationals]
+    Will do this later, I need to study for midterm 
+\end{example}
