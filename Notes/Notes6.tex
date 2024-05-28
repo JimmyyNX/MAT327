@@ -1,0 +1,59 @@
+\section{Day 6: Limit Points and Hausdorff Spaces}
+\subsection{Limit Points}
+\begin{definition}[Limit Point]
+    A Point $x$ in topological space $X$ is a \href{https://en.wikipedia.org/wiki/Accumulation_point}{Limit Point} of $A$ every open neighbourhood of $X$ has non-empty intersection with $A\backslash\{x\}$
+\end{definition}
+\begin{proposition}
+    Let $A$ be a subset of topological space $X$, then $\overline{A} = A\cup A'$ where $A'$ is the set of limit points of $A$.
+\end{proposition}
+\begin{proof}
+    $A\subseteq \overline{A}$ is true by definition, then let $x\in A'$ be arbitrary, we have that every open neighbourhood $U$ of $x$ satisfies $U\cap A\neq\varnothing$. Thus we have $A\cup A'\subseteq \overline{A}$. Conversely, Letting $x\in\overline{A}$ be arbitrary, if $x\in A$ we are done, otherwise we may assume that $x\not\in A$, we have that every open neighbourhood $U$ of $x$ intersects $A$. Furthermore, since $x\not\in A$, $U\cap(A\backslash\{x\})\neq\varnothing$, thus $x\in A'$. Thus showing double inclusion.
+\end{proof}
+\begin{corollary}
+    Subsets of a topological space are closed if and only if it includes all of it's limit points.
+\end{corollary}
+\begin{definition}[Convergence of a Sequence]
+    Let $x_n$ be a sequence in topological space $X$, we say that $x_n$ converges to $x$ if for every open neighbourhood $U$ of $x$, there exists $n\in\mathbb{N}$ such that $n>N$ implies that $x_n\in U$.
+\end{definition}
+\begin{example}[The Line]
+    In $\mathbb{R}$, we say that $x_n\to x$ if for all $\varepsilon>0$, there exists $N>0$ such that $n>N\implies\vert x-x_n\vert <\varepsilon$
+
+
+\end{example}
+\begin{example}[Sierpinski Space]
+    Recall the \hyperlink{SierpinskiSpace}{Sierpinkski Space}. Assuming that $x$ is the open singleton, the sequence $x_n=x$ converges to $x$ and $y$.
+\end{example}
+\begin{example}[Indiscrete Topology]
+    We have that every sequence converges to every point, since the only neighbourhood of any $x\in X$ is the entire set 
+\end{example}
+\begin{example}[Discrete Topology]
+    In this space, if the sequence converges, it must be eventually constant. You can try proving this.
+\end{example}
+\begin{example}[Sorgenfrey Line]
+    Consider the sequences
+    \begin{align*}
+        x_n = \frac{1}{n} &&y_n = -\frac{1}{n}
+    \end{align*}
+    We have that $x_n\to 0$ but $y_n$ diverges
+\end{example}
+\begin{example}[$K$-Topology]
+    We have that $x_n=\frac{1}{n}$ diverges in this space, since $0$ exists in open sets but $\frac{1}{n}$ isn't in every open neighbourhood containing 0.
+\end{example}
+\begin{remark}
+    Generally, the most open sets in your topology, the harder it is to converge.
+\end{remark}
+\subsection{Hausdorff Space}
+\begin{definition}[Hausdorff Space]
+    We say topological space $X$ is \href{https://en.wikipedia.org/wiki/Hausdorff_space}{Hausdorff} if for every pair of distinct $x,y\in X$, there are disjoint open neighbourhoods $U$ and $V$ of $x,y$ respectively
+\end{definition}
+\begin{theorem}
+    Points are closed in Hausdorff Spaces
+\end{theorem}
+\begin{proof}
+    We first define
+    \[ V_x=\bigcup_{x\neq y}V_y\]
+    By construction we have that  $V=X\backslash \{x\}$, so $\{x\}$ is closed.
+\end{proof}
+\begin{example}
+    The cofinite topology on infinite $X$ is an example of a topological space with closed points, but isn't Hausdorff.
+\end{example}
